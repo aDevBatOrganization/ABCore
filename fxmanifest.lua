@@ -1,18 +1,23 @@
 fx_version 'cerulean'
 game 'gta5'
 
-author "a-dev.bat Team | Abject"
-description "ABCore is a framework developped by a french dev, if you clone the repo github in you're ./ressources/ you've got auto update"
+framework "ABCore"
+author "a-dev.bat Team | Abject | Laarfang"
+description "ABCore is a framework developped by French dev, if you clone the repo github in you're ./ressources/ you've got auto update"
 repository "https://github.com/aDevBatOrganization/ABCore.git"
 discord "https://discord.gg/KQDcjZGxtq"
+shop "https://a-dev.ovh"
 version '1.0.0'
 
+-- #######
 -- General
+-- #######
 
 lua54 'yes'
 
+
 shared_scripts {
-    'config.lua'
+    'shared/*.lua'
 }
 
 client_scripts {
@@ -23,10 +28,20 @@ server_scripts {
     'server/*.lua'
 }
 
+ui_page 'ui/index.html'
+
+files {
+    'ui/index.html',
+    'ui/css/*.css',
+    'ui/js/*.js',
+}
+
+-- #####
 -- a_hud
+-- #####
 
 shared_scripts {
-    'a_hud/config.lua'
+    'a_hud/*.lua'
 }
 
 client_scripts {
@@ -37,10 +52,20 @@ server_scripts {
     'a_hud/server/*.lua'
 }
 
-ui_page 'a_hud/ui/index.html'
 
-files {
-    'a_hud/ui/index.html',
-    'a_hud/ui/css/*.css',
-    'a_hud/ui/js/*.js',
+-- ########################################################################
+-- playerConnect verifie l'id steam, cree le joueur si il n'est pas present
+-- ########################################################################
+
+shared_scripts {
+    'a_playerConnect/*.lua'
+}
+
+client_scripts {
+    'a_playerConnect/client/*.lua'
+}
+
+server_scripts {
+    "@mysql-async/lib/MYSQL.lua",
+    'a_playerConnect/server/*.lua'
 }
